@@ -26238,21 +26238,11 @@ window.hideSplashEarly = function() {
     if (globalAPI.enableLockScreen === false) return;
 
     // 开屏动画结束后，若没有被“激活锁”拦截，则唤起 iOS 锁屏界面
-    
-        initLockScreen();
-    }
+    initLockScreen();
 };
 
 
-// 同样拦截底层系统激活操作，一旦破解了激活锁，立即进入 iOS 锁屏
-const oldVerifyActivation = window.verifyActivation || verifyActivation;
-window.verifyActivation = function() {
-    if(typeof oldVerifyActivation === 'function') oldVerifyActivation();
-    if(localStorage.getItem('ai_os_device_activated') === 'true') {
-        setTimeout(initLockScreen, 500);
-    }
-};
-// 👆 新增结束 👆
+
 
 function toggleLockScreen() {
     globalAPI.enableLockScreen = document.getElementById('global-lockscreen-toggle').checked;
